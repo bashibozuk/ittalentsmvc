@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ITTalentsMVC</title>
+    <style type="text/css">
+
+        nav ul {
+            padding: 0;
+            clear: both;
+            display: inline-block;
+        }
+        nav ul li {
+            list-style-type:none;
+            float:left;
+            padding: 0 0.5em;
+            margin: 0;
+        }
+
+        #container {
+            min-height: 320px;
+            border: 1px solid red;
+        }
+
+    </style>
+
+    <script type="text/javascript" src="mvc/Promise.js"></script>
+    <script type="text/javascript" src="mvc/Ajax.js"></script>
+    <script type="text/javascript" src="mvc/View.js"></script>
+    <script type="text/javascript" src="mvc/Application.js"></script>
+
+    <script type="text/javascript" src="app/controllers/OneController.js"></script>
+    <script type="text/javascript" src="app/controllers/TwoController.js"></script>
+    <script type="text/javascript" src="app/controllers/ThreeController.js"></script>
+
+    <script type="text/javascript">
+
+        (function() {
+            var config = {
+                templatePath:'http://localhost:8383/ittalentsmvc/app/views',
+                dataPath: 'http://localhost:8383/ittalentsmvc',
+                routes: {
+                    '': {
+                        controller: 'one',
+                        template: 'one.html'
+                    },
+                    '/one': {
+                        controller: 'one',
+                        template: 'one.html'
+                    },
+                    '/two': {
+                        controller: 'two',
+                        template: 'two.html'
+                    },
+                    '/three': {
+                        controller: 'three',
+                        template: 'three.html'
+                    }
+                },
+                controllers: {
+                    'one' : OneController,
+                    'two' : TwoController,
+                    'three' : ThreeController
+
+                }
+            }
+
+            window.onload = function() {
+                Application.createApp(config).start();
+            }
+
+        })();
+
+    </script>
+
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="#/one"> One</a></li>
+            <li><a href="#/two"> Two</a></li>
+            <li><a href="#/three">Three</a></li>
+        </ul>
+    </nav>
+</header>
+<div id="container" data-role="app-container">
+
+</div>
+<footer>
+    Powered by ITTalents&copy; 2015
+</footer>
+</body>
+</html>
