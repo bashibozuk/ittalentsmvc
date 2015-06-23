@@ -151,22 +151,24 @@ Model.prototype.applyToForm = function (form) {
  */
 Model.prototype.applyErrorsToForm = function (form) {
     for (var field in this) {
-        if (!this.hasOwnProperty(field)) {
+        if (!this.hasOwnProperty(field) || (field == 'errors' || field == 'validators')) {
             continue;
         }
+        var fields = form.querySelectorAll('[name=' + field + ']');
+        if (fields.length > 1) {
+            var parent = fields[0].parentNode;
+            var errorContainer = parent.nextSibling;
+        } else {
+            var parent = fields[0].parentNode;
+            var errorContainer = parent.querySelector('.error');
 
+        }
+        
         if (this.errors[field] && this.errors[field].length) {
             var error = this.errors[field].join('<br>');
-            var fields = form.querySelectorAll('[name=' + field + ']');
-            if (fields.length > 1) {
-                var parent = fields[0].parentNode;
-                var errorContainer = parent.nextSibling;
-                errorContainer.innerHTML = this.errors[field].join('<br>');
-            } else {
-                var parent = fields[0].parentNode;
-                var errorContainer = parent.querySelector('.error');
-                errorContainer.innerHTML = this.errors[field].join('<br>');
-            }
+            errorContainer.innerHTML = error;
+        } else {
+            errorContainer.innerHTML = ''
         }
     }
 };
