@@ -10,7 +10,7 @@
  * function ChildClass () {
  *  this.propertyOne = null;
  *  this.propertyTwo = null;
- *  Model.appli(this, arguments);
+ *  Model.apply(this, arguments);
  * }
  *   
  * @returns {Model}
@@ -26,7 +26,7 @@ function Model() {
 Model.prototype.initErrors = function() {
     this.errors = {};
     for (var prop in this) {
-        if (this.hasOwnProperty(prop)) {
+        if (this.hasOwnProperty(prop) && prop !== 'errors' && prop !== 'validators') {
             this.errors[prop] = [];
         }
     }
