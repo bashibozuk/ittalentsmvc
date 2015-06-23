@@ -162,6 +162,10 @@ Model.prototype.applyErrorsToForm = function (form) {
                 var parent = fields[0].parentNode;
                 var errorContainer = parent.nextSibling;
                 errorContainer.innerHTML = this.errors[field].join('<br>');
+            } else {
+                var parent = fields[0].parentNode;
+                var errorContainer = parent.querySelector('.error');
+                errorContainer.innerHTML = this.errors[field].join('<br>');
             }
         }
     }
